@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="action_report_patient_id">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <h2 class="text-center">Patient Report</h2>
+                            <br/>
+                        </div>
+                        <div class="above_table" style="margin-top: 30px;text-align:right; direction: rtl">
+                            <div class="right" style="float:right;">
+                                <strong>اسم المريض :</strong>
+                                <strong t-field="o.name"></strong>
+                                <br/>
+                                <strong>الجنس :</strong>
+                                <strong t-field="o.gender"></strong>
+                            </div>
+                            <div class="left" style="float:left;padding-left: 130px">
+                                <strong>تاريخ الميلاد :</strong>
+                                <strong t-field="o.date_of_birth"></strong>
+                                <br/>
+                                <strong>السن:</strong>
+                                <strong t-field="o.age"></strong>
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div style="text-align:right; direction: rtl; float:right">
+                            <table class="\table table-sm o_main_table"
+                                   style="border: 2px solid black; width:900px;margin_top:50px">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" style="colspan:">
+                                            <strong>م</strong>
+                                        </th>
+                                        <th class="text-center">
+                                            <strong>المريض</strong>
+                                        </th>
+                                        <th class="text-center">
+                                            <strong>الوصف</strong>
+                                        </th>
+                                        <th class="text-center">
+                                            <strong>الحاله</strong>
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.appointment_ids" t-as="line">
+                                        <tr>
+                                            <td class="text-center">
+                                                <span t-field="line.id"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-field="line.patient_id"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-field="line.note"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-field="line.state"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

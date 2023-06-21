@@ -28,6 +28,7 @@ class HospitalPatient(models.Model):
         string='Date Of Birth',
     )
     due_date = fields.Date(
+        string='Due Date',
         default=lambda self: self.env['ir.config_parameter'].sudo().get_param('elzhor_hospital.due_date')
     )
 

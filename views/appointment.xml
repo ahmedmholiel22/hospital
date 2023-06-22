@@ -9,6 +9,17 @@
         <field name="code">records.action_confirm()</field>
     </record>
 
+    <record id="view_event_appointment_calendar" model="ir.ui.view">
+        <field name="name">view.appointment.calendar</field>
+        <field name="model">hospital.appointment</field>
+        <field eval="2" name="priority"/>
+        <field name="arch" type="xml">
+            <calendar date_start="date_appointment" string="Appointment" color="state">
+                <field name="patient_id"/>
+            </calendar>
+        </field>
+    </record>
+
     <record id="view_appointment_search" model="ir.ui.view">
         <field name="name">appointment.search</field>
         <field name="model">hospital.appointment</field>
@@ -136,7 +147,7 @@
         <field name="name">Appointment</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hospital.appointment</field>
-        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_mode">tree,kanban,form,calendar</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new patient!

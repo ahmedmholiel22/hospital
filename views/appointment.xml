@@ -8,7 +8,7 @@
         <field name="state">code</field>
         <field name="code">records.action_confirm()</field>
     </record>
-
+    <!--ADD CALENDER VIEW-->
     <record id="view_event_appointment_calendar" model="ir.ui.view">
         <field name="name">view.appointment.calendar</field>
         <field name="model">hospital.appointment</field>

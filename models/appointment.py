@@ -68,12 +68,16 @@ class Appointment(models.Model):
     sequence_id = fields.Many2one(
         'ir.sequence', 'Reference Sequence',
         check_company=True, copy=False)
+    is_done = fields.Boolean()
 
-
-
+    def action_advanced(self):
+        self.is_done = True
 
     def action_confirm(self):
-        self.state = 'confirm'
+        if self.is_done == True:
+            self.state = 'confirm'
+        else:
+            raise ValidationError(_('click on advanced button First'))
 
     def action_done(self):
         self.state = 'done'
@@ -148,11 +152,6 @@ class Appointment(models.Model):
             self.gender = ''
             self.note = ''
 
-
-
-
-
-
     def unlink(self):
         patient_rec = self.mapped('patient_id')
         if self.state == 'done':
@@ -166,8 +165,7 @@ class Appointment(models.Model):
 
         return appoint_rec.unlink()
 
-
-    @api.returns('self', lambda x : x.id)
+    @api.returns('self', lambda x: x.id)
     def copy(self, default=None):
         if not default:
             default = {}
@@ -176,13 +174,17 @@ class Appointment(models.Model):
         return super(Appointment, self).copy(default=default)
 
 
-
 class AppointmentPrescriptionLines(models.Model):
     _name = "appointment.prescription.lines"
     _description = "Appointment Prescription Lines"
 
     sl_no = fields.Integer(string="SNO.")
+    name = fields.Text(string='Description', required=True)
+    sequence = fields.Integer(string='Sequence', default=10)
     product_id = fields.Many2one('product.product', required=True)
     unit_price = fields.Float(related='product_id.list_price', string="Unit Price")
     qty = fields.Integer(string="Quantity")
     appointment_id = fields.Many2one('hospital.appointment', string="Appointment")
+    display_type = fields.Selection([
+        ('line_section', "Section"),
+        ('line_note', "Note")], default=False, help="Technical field for UX purpose.")

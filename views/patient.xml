@@ -136,7 +136,7 @@
                     </group>
                     <notebook>
                         <page string="Appointment" name="appointment">
-                            <field name="appointment_ids">
+                            <field name="appointment_ids" widget="section_and_note_one2many">
                                 <tree editable="bottom">
                                     <field name="patient_id"/>
                                     <field name="age"/>

@@ -11,10 +11,10 @@ class ResConfigSettings(models.TransientModel):
 
     cancel_days = fields.Integer(
         string='cancel days',
-        config_parameter='elzhor_hospital.cancel_days'
+        config_parameter='hospital.cancel_days'
     )
 
     due_date = fields.Datetime(
         string='Date Of Birth',
-        config_parameter='elzhor_hospital.due_date'
+        config_parameter='hospital.due_date'
     )

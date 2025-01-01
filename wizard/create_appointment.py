@@ -27,7 +27,7 @@ class CreateAppointmentWiz(models.TransientModel):
         self.env['hospital.appointment'].create(vals)
 
     def action_appointment_view(self):
-        action = self.env.ref('elzhor_hospital.action_appointment').read()[0]
+        action = self.env.ref('hospital.action_appointment').read()[0]
         action['domain'] = [('patient_id', '=', self.patient_id.id)]
         return action
 

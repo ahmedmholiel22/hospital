@@ -85,6 +85,7 @@
                     <button id="button_confirm" name="action_confirm" type="object" string="Confirm"
                             confirm="are you sure that you need to confirm"
                             states="draft" class="oe_highlight"/>
+                    <button id="get_patients" name="action_confirm" type="object" string="Get Patients" class="oe_highlight"/>
                     <button id="button_done" name="action_done" type="object" string="it's done"
                             states="confirm" class="oe_highlight"/>
                     <button id="button_draft" name="action_draft" type="object" string="Set to draft"
@@ -188,5 +189,14 @@
               name="Configuration"
               parent="hospital_root"
     />
+    <record id="list_view_action" model="ir.actions.client">
+        <field name="name">Patient ListView Owl</field>
+        <field name="tag">hospital.action_list_view</field>
+    </record>
 
+    <menuitem id="patient_owl"
+              name="Patients Owl"
+              parent="hospital_patient"
+              action="list_view_action"
+    />
 </odoo>

@@ -3,6 +3,7 @@ from odoo import api, fields, models, _, tools
 from odoo.exceptions import ValidationError
 from datetime import datetime, timezone, timedelta,date
 from dateutil import relativedelta
+import requests
 
 
 class HospitalPatient(models.Model):
@@ -29,7 +30,7 @@ class HospitalPatient(models.Model):
     )
     due_date = fields.Date(
         string='Due Date',
-        default=lambda self: self.env['ir.config_parameter'].sudo().get_param('elzhor_hospital.due_date')
+        default=lambda self: self.env['ir.config_parameter'].sudo().get_param('hospital.due_date')
     )
 
     age = fields.Integer(
@@ -110,15 +111,23 @@ class HospitalPatient(models.Model):
     def action_cancel(self):
         self.state = 'cancel'
 
-
     def name_get(self):
         res = []
         for rec in self:
             res.append((rec.id, '[%s - %s]' % (rec.name, rec.id)))
         return res
 
-
-
+    def get_patients(self):
+        print('ddd')
+        payload = dict()
+        try:
+            response = requests.get('localhost:8016/v1/hospital_patients', data=payload)
+            if response.status_code == 200:
+                print('successful')
+            else:
+                print('fail')
+        except Exception as error:
+            raise ValidationError(str(error))
     
     @api.model
     def default_get(self, fields):

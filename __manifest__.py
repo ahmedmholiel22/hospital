@@ -13,7 +13,7 @@
         'mail',
         'base',
         'stock',
-        'report_xlsx',
+        # 'report_xlsx',
         'product'
     ],
     'data': [
@@ -27,10 +27,16 @@
         'views/appointment.xml',
         'views/sale.xml',
         'views/partner.xml',
-        'report/patient_card.xml',
-        'report/report.xml',
+        # 'report/patient_card.xml',
+        # 'report/report.xml',
         'views/res_config_settings_views.xml',
     ],
+    'assets': {
+            'web.assets_backend': [
+                'hospital/static/src/components/ListView/ListView.css',
+                'hospital/static/src/components/ListView/ListView.js',
+                'hospital/static/src/components/ListView/ListView.xml',
+            ]},
     'demo': [],
     'qweb': [],
     'installable': True,
